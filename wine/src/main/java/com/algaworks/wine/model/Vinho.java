@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "vinho")
@@ -17,15 +20,21 @@ public class Vinho {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@NotBlank(message ="Nome é obrigatório.") //nao pode nem espaco vazio
 	private String nome;
 	
+	@NotNull(message="Tipo é obrigatório.") //e objeto nao pode ser nulo, nao tem como ser vazio
 	@Enumerated(EnumType.STRING)
 	private TipoVinho tipo;
 	
+	@NotNull(message="Safra é obrigatória.")
 	private Integer safra;
 	
+	@NotNull(message="Volume é obrigatório.")
 	private Integer volume;
 	
+	@NotNull(message="Valor é obrigatório.")
 	private BigDecimal valor;
 	
 	

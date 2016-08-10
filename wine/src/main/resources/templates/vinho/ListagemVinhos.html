@@ -47,13 +47,15 @@
 				<tbody>
 					<tr th:each="vinho : ${vinhos} ">
 						<td th:text="${vinho.codigo}">1</td>
-						<td th:text="${vinho.nome}"><a href="#">Viña Amalia</a></td>
+						<td><a href="#" th:text="${vinho.nome}">Viña Amalia</a></td>
 						<td th:text="${vinho.tipo}">Tinto</td>
 						<td th:text="${vinho.safra}">2013</td>
 						<td th:text="${vinho.volume}">750ml</td>
 						<td th:text="${vinho.valor}">R$55,00</td>
 					</tr>
-					
+					<tr th:if="${vinhos.empty}">
+						<td colspan="6"> Nenhum vinho cadastrado.</td> 
+					</tr>
 				</tbody>
 			</table>
 		</div>

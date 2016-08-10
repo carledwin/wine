@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +51,15 @@ public class VinhosController {
 		cadastroVinhoService.salvar(vinho);
 		ModelAndView mv = new ModelAndView("redirect:/vinhos/novo"); //nova requisicao em /vinhos/novo
 		attributes.addFlashAttribute("mensagem","Vinho salvo com sucesso!");
+		return mv;
+	}
+	
+	/* Substituido por formattingConversionService ... public ModelAndView visualizar(@PathVariable Long codigo){*/
+	@RequestMapping("/{codigo}")
+	public ModelAndView visualizar(@PathVariable("codigo") Vinho vinho){//spring-Data faz a busca utilizando findOne automaticamente no banco
+	ModelAndView mv = new ModelAndView("/vinho/VisualizacaoVinho");
+		/*Vinho vinho = vinhos.findOne(codigo);*/
+		mv.addObject("vinho",vinho);
 		return mv;
 	}
 }

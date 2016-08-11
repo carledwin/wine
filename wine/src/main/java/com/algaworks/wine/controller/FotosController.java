@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.algaworks.wine.dto.Foto;
 import com.algaworks.wine.service.CadastroVinhoService;
+import com.algaworks.wine.storage.FotoReader;
 
 /**
  * Para trabalhar com json e javascript
@@ -21,14 +22,21 @@ import com.algaworks.wine.service.CadastroVinhoService;
 @RequestMapping("/fotos")
 public class FotosController {
 	
-	
 	@Autowired
 	private CadastroVinhoService cadastroVinhoService;
+	
+	@Autowired(required = false)//esta instancia nao e obrigatoria, sera gerada somente quando estivermos utilizando o profile storage-local 
+	private FotoReader fotoReader;
 	
 	//nome da variavel files[]
 	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
 	public Foto upload(@PathVariable Long codigo, @RequestParam("files[]") MultipartFile[] files){
 		String url = cadastroVinhoService.salvarFoto(codigo, files[0]);
 		return new Foto(url);
+	}
+	
+	@RequestMapping("/{nome:.*}")
+	public byte[] recuperar(@PathVariable String nome){
+		return fotoReader.recuperar(nome); 
 	}
 }

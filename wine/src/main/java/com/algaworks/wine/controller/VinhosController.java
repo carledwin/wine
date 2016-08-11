@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +15,8 @@ import com.algaworks.wine.model.TipoVinho;
 import com.algaworks.wine.model.Vinho;
 import com.algaworks.wine.repository.Vinhos;
 import com.algaworks.wine.service.CadastroVinhoService;
+import com.algaworks.wine.storage.FotoStorage;
+import com.algaworks.wine.storage.FotoStorageS3;
 
 @Controller
 @RequestMapping("/vinhos")
@@ -27,6 +28,9 @@ public class VinhosController {
 	
 	@Autowired
 	private CadastroVinhoService cadastroVinhoService;
+	
+	@Autowired
+	private FotoStorage fotoStorage;
 	
 	@RequestMapping
 	public ModelAndView pesquisa() {
@@ -62,7 +66,7 @@ public class VinhosController {
 		/*Vinho vinho = vinhos.findOne(codigo);*/
 	
 	if(vinho.temFoto()){
-		vinho.setUrl("http://localhost:9444/s3/wine/"+ vinho.getFoto()+"?noAuth=true");
+		vinho.setUrl(fotoStorage.getUrl(vinho.getFoto()));
 	}
 		mv.addObject("vinho",vinho);
 		return mv;

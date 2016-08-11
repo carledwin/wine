@@ -2,8 +2,6 @@ package com.algaworks.wine.service;
 
 import java.io.IOException;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +29,8 @@ public class CadastroVinhoService {
 	
 	public String salvarFoto(Long codigo, MultipartFile foto){
 		Vinho vinho = vinhos.findOne(codigo);
-		vinho.setFoto(foto.getName());
 		String nomeFoto = foto.getOriginalFilename();
+		vinho.setFoto(nomeFoto);
 		vinhos.save(vinho);
 		
 		try {
@@ -45,6 +43,6 @@ public class CadastroVinhoService {
 		} catch (AmazonClientException | IOException e) {
 			throw new RuntimeException("Erro salvando foto no S3.", e);
 		}
-		return foto.getOriginalFilename();
+		return "http://localhost:9444/s3/wine/"+ nomeFoto +"?noAuth=true";
 	}
 }

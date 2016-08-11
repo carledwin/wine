@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,10 @@ public class VinhosController {
 	public ModelAndView visualizar(@PathVariable("codigo") Vinho vinho){//spring-Data faz a busca utilizando findOne automaticamente no banco
 	ModelAndView mv = new ModelAndView("/vinho/VisualizacaoVinho");
 		/*Vinho vinho = vinhos.findOne(codigo);*/
+	
+	if(vinho.temFoto()){
+		vinho.setUrl("http://localhost:9444/s3/wine/"+ vinho.getFoto()+"?noAuth=true");
+	}
 		mv.addObject("vinho",vinho);
 		return mv;
 	}

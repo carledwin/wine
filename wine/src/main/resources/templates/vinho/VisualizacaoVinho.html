@@ -21,8 +21,12 @@
 
 <div class="container-fluid">
 	<div class="row">
-	<div class="col-sm-9">
-		<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${vinho.codigo}">
+	<div class="col-sm-9 js-container-foto">
+	
+	<img th:src="${vinho.url}" th:if="${vinho.temFoto()}" class="img-responsive" style="margin:auto;"/>
+	
+	<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${vinho.codigo}" 
+		th:if="${not vinho.temFoto()}">
 		<img th:src="@{/images/mockup-garrafa.png}" />
 		
 			<div>
@@ -40,6 +44,7 @@
 		<li class="list-group-item" th:text="${vinho.safra}"></li>
 		<li class="list-group-item" th:text="|${vinho.volume}ml|"></li>
 		<li class="list-group-item" th:text="|R$${vinho.valor}|"></li>
+		<li class="list-group-item" th:text="${vinho.foto}"></li>
 		</ul>
 	</div>
 	</div>

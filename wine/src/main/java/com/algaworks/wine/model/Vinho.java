@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "vinho")
@@ -39,6 +41,13 @@ public class Vinho {
 	
 	private String foto;
 	
+	@Transient
+	private String url;
+	
+	
+	public boolean temFoto(){
+		return !StringUtils.isEmpty(this.foto);
+	}
 	
 	public Long getCodigo() {
 		return codigo;
@@ -104,6 +113,12 @@ public class Vinho {
 	}
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	

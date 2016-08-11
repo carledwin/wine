@@ -25,8 +25,11 @@
 		<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${vinho.codigo}">
 		<img th:src="@{/images/mockup-garrafa.png}" />
 		
-			<div><span>Arraste a foto aqui ou </span>
-			<a class="wn-upload-form-file">Selecione <input id="upload-select" type="file" accept="jpg,jpeg, png" /></a>	
+			<div>
+				<span>Arraste a foto aqui ou </span>
+				<a class="wn-upload-form-file">Selecione 
+				<input id="upload-select" type="file" accept=".jpg,.jpeg, .png" />
+				</a>	
 		</div>
 		</div>
 	</div>

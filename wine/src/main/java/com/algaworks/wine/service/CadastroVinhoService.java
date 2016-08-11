@@ -13,9 +13,13 @@ public class CadastroVinhoService {
 	private Vinhos vinhos;
 	
 	public void salvar(Vinho vinho){
-		
 		//Escrever regras de negócio aqui
-		
+		vinhos.save(vinho);
+	}
+	
+	public void adicionarFoto(Long codigo, String nome){
+		Vinho vinho = vinhos.findOne(codigo);
+		vinho.setFoto(nome);
 		vinhos.save(vinho);
 	}
 }

@@ -1,0 +1,9 @@
+<application>
+  <component name="Settings">
+    <option name="exportFrom" value="SELECTION" />
+    <option name="exportTo" value="CLIPBOARD" />
+    <option name="clipboardExportType" value="PLAIN_TEXT" />
+    <option name="lineNumbering" value="AS_IN_EDITOR" />
+    <option name="preTagAttributes" value="font-family:monospace;" />
+  </component>
+</application>
